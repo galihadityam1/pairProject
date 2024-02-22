@@ -13,6 +13,17 @@
     <p>Ini profile</p>
     <p>Anda Masuk Sebagai Admin <%= data.name %></p>
 
+    <form action="/admin/<%= data.id %>/?sort=CategoryId" method="get">
+      <select class="form-select" aria-label="Default select example" name="CategoryId">
+          <option selected value="">All</option>
+          <% category.forEach(res => { %>
+          <option value="<%=res.id%>"><%= res.type %></option>
+      <% }) %>
+      </select>
+      <p></p>
+      <button type="submit" class="btn btn-primary">FILTER</button>
+  </form>
+
     <% car.forEach(res => {%>
       <div class="col-md-4">
           <div class="card mb-3" style="width: 18rem;">
@@ -22,6 +33,7 @@
                   <h6><%= res.CategoryId  %></h6>
                   <h6>(<%= res.formatPrice  %>)</h6>
                   <a href="/cars/<%= res.id %>/delete/<%= data.UserId %>" class="btn btn-danger">Delete</a>
+                  <a href="/cars/edit/<%= res.id %>" class="btn btn-danger">Edit</a>
               </div>
           </div>
       </div>

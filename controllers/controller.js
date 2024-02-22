@@ -7,6 +7,9 @@ class Controller {
         try {
             // console.log(req.params);
             let {userId} = req.params
+            let {CategoryId} = req.query
+            // console.log(req.query, req.params);
+            let category = await Category.findAll()
             let data = await Profile.findOne({
                 where: {
                     UserId: {
@@ -19,11 +22,27 @@ class Controller {
                 },
                 order: [['id', 'asc']]
             })
-            let car = await Car.findAll({
-                include: ProfileCar
-            })
+            let sort = {}
+            if(CategoryId){
+                sort = {
+                    include: [
+                        Category, ProfileCar
+                    ],
+                    where: {
+                        CategoryId: {
+                            [Op.eq]: CategoryId
+                        }
+                    }
+                }
+            } else {
+                sort = {
+                    include: Category
+                }
+            }
+            let car = await Car.findAll(sort)
             // console.log(data.UserId);
-            res.render('profile', {data, car})
+            // res.send(car)
+            res.render('admin', {data, car, category})
         } catch (error) {
             console.log(error);
             res.send(error)
@@ -34,6 +53,9 @@ class Controller {
         try {
             // console.log(req.params);
             let {userId} = req.params
+            let {CategoryId} = req.query
+            console.log(req.query, req.params);
+            let category = await Category.findAll()
             let data = await Profile.findOne({
                 where: {
                     UserId: userId
@@ -48,7 +70,7 @@ class Controller {
                 include: ProfileCar
             })
             // console.log(data.UserId);
-            res.render('profile', {data, car})
+            res.render('profile', {data, car, category})
         } catch (error) {
             console.log(error);
             res.send(error)
@@ -81,6 +103,7 @@ class Controller {
 
     static async postAddCar(req, res){
         try {
+            console.log(req.params);
             let {name, CategoryId, carReleased, price, carImage} = req.body
             // console.log(req.body);
             await Car.create({name, CategoryId, carReleased, price, carImage})
@@ -111,7 +134,7 @@ class Controller {
             CarId = +CarId
             console.log(req.params);
             await Car.update({name, CategoryId, carReleased, price, carImage}, {where: {id: CarId}})
-            res.redirect(`/profile/${userId}`)
+            res.redirect(`/admin/${userId}`)
         } catch (error) {
             console.log(error);
             res.send(error)

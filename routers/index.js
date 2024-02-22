@@ -32,6 +32,7 @@ res.render(`home`)
 
 router.get('/admin/:userId',login, Controller.admin)
 router.get('/profile/:userId', login, Controller.profile)
+// router.get('/cars',login, Controller.getAllCars)
 router.get('/cars/add',login, Controller.getAddCar)
 router.post('/cars/add',login, Controller.postAddCar)
 router.get('/cars/edit/:CarId',login, Controller.getEditCar)
