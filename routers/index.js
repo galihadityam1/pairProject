@@ -41,4 +41,13 @@ router.post('/cars/edit/:CarId',login, Controller.postEditCar)
 router.get('/cars/detail/:CarId',login, Controller.detailCar)
 router.get('/cars/:CarId/delete/:UserId',login, Controller.delete)
 
+router.get('/dummy', (req,res)=>{
+  res.render('profileAdmin')
+})
+
+
+router.get('/dummy2', (req,res)=>{
+  res.render('profileUser')
+})
+
 module.exports = router

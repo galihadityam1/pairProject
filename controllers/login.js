@@ -126,7 +126,6 @@ class LoginController{
             throw error    
         }
     }
-
 };
 
 module.exports = LoginController
