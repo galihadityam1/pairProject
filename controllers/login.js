@@ -61,6 +61,17 @@ class LoginController{
             res.send(error)
         }
     }
+
+    static async logout(req, res){
+        try {
+            req.session.destroy();
+            setTimeout(() => {
+                res.redirect('/');
+            }, 2000)
+        } catch (error) {
+            throw error    
+        }
+    }
 };
 
 module.exports = LoginController

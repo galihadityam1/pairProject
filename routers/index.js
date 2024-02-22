@@ -11,6 +11,8 @@ router.get('/', (req, res) => {
   router.post('/register', LoginController.postRegister)
   router.get('/login', LoginController.getLogin)
   router.post('/login', LoginController.postLogin)
+
+  router.get('/logout', LoginController.logout)
   
   //=========middleware================
   function login (req, res, next) {
@@ -54,11 +56,6 @@ router.get('/dummy', (req,res)=>{
 
 router.get('/dummy2', (req,res)=>{
   res.render('profileUser')
-})
-
-
-router.get('/dummy3', (req,res)=>{
-  res.render('profileAdmin')
 })
 
 module.exports = router
