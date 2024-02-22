@@ -1,0 +1,5 @@
+npx sequelize-cli model:generate --name User --attributes username:string,password:string
+npx sequelize-cli model:generate --name Profile --attributes name:string,gender:string,userImage:string,email:string
+npx sequelize-cli model:generate --name Category --attributes electricVehicle:string,gasolineVehicle:string
+npx sequelize-cli model:generate --name Car --attributes name:string,categoryId:string,price:integer,carImage:string
+npx sequelize-cli model:generate --name ProfileCar --attributes ProfileId:string,CarId:string,address:string

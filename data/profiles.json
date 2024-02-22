@@ -1,26 +1,26 @@
 [
     {
-        "name" : "Alfonso de Albuquerque",
-        "nation" : "Portuguese",
-        "age" : 38,
-        "militaryForce" : 0
+        "name" : "Jengki",
+        "gender" : "Laki",
+        "userImage" : "",
+        "email" : "jengkikuk@pleo.com"
     },
     {
-        "name" : "Vercingetorix",
-        "nation" : "Gallia",
-        "age" : 28,
-        "militaryForce" : 0
+        "name" : "Kiku",
+        "gender" : "Perempuan",
+        "userImage" : "",
+        "email" : "giukiku@pleo.com"
     },
     {
-        "name" : "Napoleon Bonaparte",
-        "nation" : "French",
-        "age" : 39,
-        "militaryForce" : 0
+        "name" : "Parte",
+        "gender" : "French",
+        "userImage" : "",
+        "email" : "partesini@pleo.com"
     },
     {
-        "name" : "Attila the Hun",
-        "nation" : "Hungary",
-        "age" : 28,
-        "militaryForce" : 0
+        "name" : "Tila",
+        "gender" : "Hungary",
+        "userImage" : "",
+        "email" : "tilapia@pleo.com"
     }
 ]
