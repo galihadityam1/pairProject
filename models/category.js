@@ -11,11 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Category.hasMany(models.Car)
     }
   }
   Category.init({
-    electricVehicle: DataTypes.STRING,
-    gasolineVehicle: DataTypes.STRING
+    type: DataTypes.STRING,
+    madeIn: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Category',

@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const Helper = require('../helper');
 module.exports = (sequelize, DataTypes) => {
   class Car extends Model {
     /**
@@ -11,16 +12,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Car.belongsTo(models.Category)
+      Car.hasMany(models.ProfileCar)
+    }
+
+    get formatPrice(){
+      return Helper.formatPrice(this.price)
     }
   }
   Car.init({
     name: DataTypes.STRING,
-    categoryId: DataTypes.STRING,
+    CategoryId: DataTypes.STRING,
     price: DataTypes.INTEGER,
-    carImage: DataTypes.STRING
+    carImage: DataTypes.STRING,
+    carReleased: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Car',
+    modelName: 'Car'
   });
   return Car;
 };

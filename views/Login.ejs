@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <%- include('_part_head.ejs')%>
+</head>
+<body>
+    <div class="container" margin="auto">
+    <form action="/login" method="post">
+        <h3>Silahkan Login</h3>  
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">User Name</label>
+          <input type="text" class="form-control" id="username" name="username">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <br>
+        <br>
+        <br>
+        <a href="/" type="button" class="btn btn-outline-secondary">Home</button></a>
+      </form>
+    </div>
+    <%- include('_part_body.ejs')%>
+</body>
+</html>
