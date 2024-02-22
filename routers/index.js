@@ -38,13 +38,27 @@ router.get('/', (req, res) => {
     // }
 // })
 
-router.get('/profile/:userId', Controller.profile)
 router.get('/cars', Controller.getAllCars)
 router.get('/cars/add', Controller.getAddCar)
 router.post('/cars/add', Controller.postAddCar)
+router.get('/profile/:userId', Controller.profile)
 router.get('/cars/edit/:CarId', Controller.getEditCar)
 router.post('/cars/edit/:CarId', Controller.postEditCar)
 router.get('/cars/detail/:CarId', Controller.detailCar)
 router.get('/cars/:CarId/delete', Controller.delete)
+
+router.get('/dummy', (req,res)=>{
+  res.render('profileAdmin')
+})
+
+
+router.get('/dummy2', (req,res)=>{
+  res.render('profileUser')
+})
+
+
+router.get('/dummy3', (req,res)=>{
+  res.render('profileAdmin')
+})
 
 module.exports = router
