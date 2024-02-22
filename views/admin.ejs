@@ -11,9 +11,8 @@
     <%- include("navbar/up") %>
 
     <p>Ini profile</p>
-    <p>Anda Masuk Sebagai User <%= data.name %></p>
+    <p>Anda Masuk Sebagai Admin <%= data.name %></p>
 
-    
     <% car.forEach(res => {%>
       <div class="col-md-4">
           <div class="card mb-3" style="width: 18rem;">
@@ -22,11 +21,10 @@
                   <h5 class="card-title"><%= res.name %></h5>
                   <h6><%= res.CategoryId  %></h6>
                   <h6>(<%= res.formatPrice  %>)</h6>
-                  <a href="/cars/detail/<%= res.id %>" class="btn btn-danger">Detail</a>
-                  <a href="/cars/edit/<%= res.id %>" class="btn btn-danger">Edit</a>
+                  <a href="/cars/<%= res.id %>/delete/<%= data.UserId %>" class="btn btn-danger">Delete</a>
               </div>
           </div>
-    </div>
+      </div>
   <% })  %>
     
   </body>

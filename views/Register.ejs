@@ -11,15 +11,42 @@
     <form action="/register" method="post">
         <h3>Silahkan Register</h3>  
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">User Name</label>
+          <label for="exampleInputEmail1" class="form-label">Username</label>
           <input type="text" class="form-control" id="inputusername" name="username">
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Password</label>
           <input type="password" class="form-control" id="inputpassword" name="password">
         </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Name</label>
+          <input type="text" class="form-control" id="inputname" name="name">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Gender</label>
+          <select class="form-select" aria-label="Default select example" name="gender">
+            <option selected>Open this select menu</option>
+            <option value="Laki">Laki</option>
+            <option value="Perempuan">Perempuan</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Image</label>
+          <input type="text" class="form-control" id="inputimage" name="userImage">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Email</label>
+          <input type="text" class="form-control" id="inputemail" name="email">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Choose Your Role</label>
+          <select class="form-select" aria-label="Default select example" name="role">
+            <option selected>Open this select menu</option>
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+          </select>
+        </div>
         <button type="submit" class="btn btn-primary">Register</button>
-        <br>
         <br>
         <br>
         <a href="/" type="button" class="btn btn-outline-secondary">Home</button></a>

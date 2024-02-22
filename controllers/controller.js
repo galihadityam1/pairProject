@@ -3,49 +3,54 @@ const { User, Profile, Category, Car, ProfileCar } = require('../models/index');
 // const bcrypt = require('bcryptjs');
 
 class Controller {
-    static async profile(req, res){
+    static async admin(req, res){
         try {
+            // console.log(req.params);
             let {userId} = req.params
-            console.log(userId);
-            let data = await Profile.findAll({
+            let data = await Profile.findOne({
+                where: {
+                    UserId: {
+                        [Op.eq]: userId
+                    }
+                },
                 include:{
                     model: ProfileCar,
                     include: Car
                 },
                 order: [['id', 'asc']]
             })
-                res.send(data)
+            let car = await Car.findAll({
+                include: ProfileCar
+            })
+            // console.log(data.UserId);
+            res.render('profile', {data, car})
         } catch (error) {
             console.log(error);
             res.send(error)
         }
     }
 
-    static async getAllCars(req, res){
+    static async profile(req, res){
         try {
-            // console.log(req.query);
-            let {CategoryId} = req.query
-            let category = await Category.findAll()
-            let sort = {}
-            if(CategoryId){
-                sort = {
-                    include: Category,
-                    where: {
-                        CategoryId: {
-                            [Op.eq]: CategoryId
-                        }
-                    }
-                }
-            } else {
-                sort = {
-                    include: Category
-                }
-            }
-            let data = await Car.findAll(sort)
-            // res.send(data);
-            res.render('cars', {data, category})
+            // console.log(req.params);
+            let {userId} = req.params
+            let data = await Profile.findOne({
+                where: {
+                    UserId: userId
+                },
+                include:{
+                    model: ProfileCar,
+                    include: Car
+                },
+                order: [['id', 'asc']]
+            })
+            let car = await Car.findAll({
+                include: ProfileCar
+            })
+            // console.log(data.UserId);
+            res.render('profile', {data, car})
         } catch (error) {
-            console.log(error.message);
+            console.log(error);
             res.send(error)
         }
     }
@@ -79,7 +84,7 @@ class Controller {
             let {name, CategoryId, carReleased, price, carImage} = req.body
             // console.log(req.body);
             await Car.create({name, CategoryId, carReleased, price, carImage})
-            res.redirect('/cars')
+            res.redirect('/admin/:userId')
         } catch (error) {
             console.log(error);
             res.send(error)
@@ -90,7 +95,9 @@ class Controller {
         try {
             let {CarId} = req.params
             let data = await Car.findOne({where: {id: CarId}})
-            res.send(data)
+            let category = await Category.findAll()
+            // res.send(data)
+            res.render('edit', {data, category})
         } catch (error) {
             console.log(error);
             res.send(error)
@@ -99,9 +106,12 @@ class Controller {
 
     static async postEditCar(req, res){
         try {
-            let {CarId} = req.params
+            let {CarId, userId} = req.params
             let {name, CategoryId, carReleased, price, carImage} = req.body
+            CarId = +CarId
+            console.log(req.params);
             await Car.update({name, CategoryId, carReleased, price, carImage}, {where: {id: CarId}})
+            res.redirect(`/profile/${userId}`)
         } catch (error) {
             console.log(error);
             res.send(error)
@@ -111,13 +121,16 @@ class Controller {
     static async delete(req, res){
         try {
             let {UserId, CarId} = req.params
+            // console.log(req.params);
             let car = await Car.findByPk(CarId);
             let error = []
             if (!car) {
                 error.push('Mobil tidak ditemukan');
             }
+            console.log(CarId, UserId);
+            // await ProfileCar.destroy({where: {CarId: CarId}})
             // await Car.destroy({where: {id: CarId}})
-            res.redirect(`/cars/?error=${error}`)
+            res.redirect(`/profile/${UserId}`)
         } catch (error) {
             console.log(error);
             res.send(error)
