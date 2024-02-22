@@ -9,17 +9,21 @@
   <body>
 
     <h1>OGX AUTOS!</h1>
+    <%- include("navbar/Logout") %>
+
     <p></p>
     
     <div>
-        <img src="<%= data.carImage %>" alt="">
+        <img src="<%= data.Car.carImage %>" alt="">
     </div>
     <div>
-        <p><%= data.Category.type %></p>
-        <p><%= data.name %></p>
-        <p><%= data.carReleased %></p>
-        <p><%= data.Category.madeIn %></p>
-        <p><%= data.formatPrice %></p>
+        <h4>Mobil ini di post oleh <%= data.Profile.name %></h4>
+        <p><%= data.Car.Category.type %></p>
+        <p><%= data.Car.name %></p>
+        <p><%= data.address %></p>
+        <p><%= data.Car.carReleased %></p>
+        <p><%= data.Car.Category.madeIn %></p>
+        <p><%= data.Car.formatPrice %></p>
     </div>
   </body>
 </html>

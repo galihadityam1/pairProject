@@ -25,18 +25,17 @@ class Controller {
             let sort = {}
             if(CategoryId){
                 sort = {
-                    include: [
-                        Category, ProfileCar
-                    ],
+                    order: [['id', 'asc']],
+                    include: [Category, ProfileCar],
                     where: {
                         CategoryId: {
                             [Op.eq]: CategoryId
                         }
-                    }
+                    },
                 }
             } else {
                 sort = {
-                    include: Category
+                    include: [Category, ProfileCar]
                 }
             }
             let car = await Car.findAll(sort)
@@ -54,7 +53,7 @@ class Controller {
             // console.log(req.params);
             let {userId} = req.params
             let {CategoryId} = req.query
-            console.log(req.query, req.params);
+            // console.log(req.query, req.params);
             let category = await Category.findAll()
             let data = await Profile.findOne({
                 where: {
@@ -66,9 +65,23 @@ class Controller {
                 },
                 order: [['id', 'asc']]
             })
-            let car = await Car.findAll({
-                include: ProfileCar
-            })
+            let sort = {}
+            if(CategoryId){
+                sort = {
+                    order: [['id', 'asc']],
+                    include: [Category, ProfileCar],
+                    where: {
+                        CategoryId: {
+                            [Op.eq]: CategoryId
+                        }
+                    },
+                }
+            } else {
+                sort = {
+                    include: [Category, ProfileCar]
+                }
+            }
+            let car = await Car.findAll(sort)
             // console.log(data.UserId);
             res.render('profile', {data, car, category})
         } catch (error) {
@@ -80,7 +93,15 @@ class Controller {
     static async detailCar(req, res){
         try {
             let {CarId} = req.params
-            let data = await Car.findOne({where: {id: CarId}, include: Category})
+            // console.log(req.params);
+            let data = await ProfileCar.findOne({
+                where: {CarId: CarId}, 
+                include: [{
+                    model: Car,
+                    include: Category
+                    }, 
+                    Profile]
+            })
             // res.send(data)
             res.render('carDetail', {data})
         } catch (error) {
@@ -91,9 +112,12 @@ class Controller {
 
     static async getAddCar(req, res){
         try {
+            // console.log(req.params);
+            let {ProfileId, userId} = req.params
             let category = await Category.findAll()
+            let profile = await Profile.findByPk(ProfileId)
             // console.log(category);
-            res.render("add", {category})
+            res.render("add", {category, profile})
             
         } catch (error) {
             console.log(error);
@@ -103,10 +127,13 @@ class Controller {
 
     static async postAddCar(req, res){
         try {
-            console.log(req.params);
-            let {name, CategoryId, carReleased, price, carImage} = req.body
+            console.log(req.params, '<==== ini req params');
+            let {ProfileId} = req.params
+            let {name, CategoryId, carReleased, price, carImage, address} = req.body
             // console.log(req.body);
-            await Car.create({name, CategoryId, carReleased, price, carImage})
+            let car = await Car.create({name, CategoryId, carReleased, price, carImage});
+            let CarId = car.id
+            await ProfileCar.create({ProfileId, CarId, address})
             res.redirect('/admin/:userId')
         } catch (error) {
             console.log(error);
@@ -117,7 +144,10 @@ class Controller {
     static async getEditCar(req, res){
         try {
             let {CarId} = req.params
-            let data = await Car.findOne({where: {id: CarId}})
+            let data = await Car.findOne({
+                where: {id: CarId},
+                include: ProfileCar
+            })
             let category = await Category.findAll()
             // res.send(data)
             res.render('edit', {data, category})
@@ -151,9 +181,9 @@ class Controller {
                 error.push('Mobil tidak ditemukan');
             }
             console.log(CarId, UserId);
-            // await ProfileCar.destroy({where: {CarId: CarId}})
-            // await Car.destroy({where: {id: CarId}})
-            res.redirect(`/profile/${UserId}`)
+            await ProfileCar.destroy({where: {CarId: CarId}})
+            await Car.destroy({where: {id: CarId}})
+            res.redirect(`/admin/${UserId}`)
         } catch (error) {
             console.log(error);
             res.send(error)

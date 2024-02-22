@@ -9,6 +9,8 @@
   <body>
     <h1>OGX AUTOS!</h1>
     <%- include("navbar/up") %>
+    <%- include("navbar/Logout") %>
+
 
     <p>Ini profile</p>
     <p>Anda Masuk Sebagai User <%= data.name %></p>
@@ -31,7 +33,7 @@
               <img src="<%= res.carImage %>" class="card-img-top" alt="...">
               <div class="card-body">
                   <h5 class="card-title"><%= res.name %></h5>
-                  <h6><%= res.CategoryId  %></h6>
+                  <h6><%= res.Category.type  %></h6>
                   <h6>(<%= res.formatPrice  %>)</h6>
                   <a href="/cars/detail/<%= res.id %>" class="btn btn-danger">Detail</a>
               </div>

@@ -10,6 +10,9 @@
     <div class="container" margin="auto">
     <form action="/login" method="post">
         <h3>Silahkan Login</h3>  
+        <% if(error){ %> 
+          <p style="color: red;"><%= error %></p>
+        <% } %>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">User Name</label>
           <input type="text" class="form-control" id="username" name="username">
@@ -20,7 +23,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
         <br>
-        <br>
+        <a href="/register" type="button" class="btn btn-outline-secondary">Register</button></a>
         <br>
         <a href="/" type="button" class="btn btn-outline-secondary">Home</button></a>
       </form>

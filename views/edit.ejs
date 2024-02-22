@@ -14,9 +14,8 @@
 
     <form action="/cars/edit/<%= data.id %>" method="post">
         <select class="form-select" aria-label="Default select example" name="CategoryId">
-            <option value="" selected>Choose...</option>
             <% category.forEach(res => { %>
-            <option value="<%= res.id %>"><%= res.type %></option>
+            <option value="<%= res.id %> " selected><%= res.type %></option>
           <% }) %>
         </select>
         <div class="mb-3">
@@ -34,6 +33,10 @@
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Masukan Gambar</label>
           <input type="string" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="carImage" value="<%= data.carImage %>">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Alamat</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="address" value="<%= data.ProfileCars[0].address %>">
         </div>
        
         <button type="submit" class="btn btn-primary">Submit</button>
