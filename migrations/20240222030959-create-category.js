@@ -12,11 +12,8 @@ module.exports = {
       type: {
         type: Sequelize.STRING
       },
-      weight: {
-        type: Sequelize.INTEGER
-      },
-      volume: {
-        type: Sequelize.INTEGER
+      madeIn: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
