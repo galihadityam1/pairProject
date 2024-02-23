@@ -9,7 +9,7 @@ class Controller {
             let {userId} = req.params
             let {CategoryId} = req.query
             // console.log(req.query, req.params);
-            let category = await Category.findAll()
+            let category = await Category.tampilinSemua()
             let data = await Profile.findOne({
                 where: {
                     UserId: {

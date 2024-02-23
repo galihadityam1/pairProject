@@ -13,6 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Category.hasMany(models.Car)
     }
+
+    static async tampilinSemua(){
+      try {
+        return await Category.findAll()
+      } catch (error) {
+        throw error
+      }
+    }
   }
   Category.init({
     type: DataTypes.STRING,

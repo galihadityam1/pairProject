@@ -14,6 +14,19 @@ module.exports = (sequelize, DataTypes) => {
       Profile.hasMany(models.ProfileCar)
       Profile.belongsTo(models.User)
     }
+
+    static async roleName(){
+      try {
+        // let name
+        if(Profile.gender === 'Laki'){
+          return Profile.name = `Bapak ${Profile.name}`
+        } else {
+          return Profile.name = `Ibu ${Profile.name}`
+        }
+      } catch (error) {
+        throw error
+      }
+    }
   }
   Profile.init({
     name: DataTypes.STRING,
