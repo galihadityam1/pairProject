@@ -46,9 +46,7 @@ class LoginController{
             // console.log();
             // res.send(user)
             if(username === user.username){
-                //  let validatePassword = await bcrypt.compare(password, User.password)
                  let validatePassword = bcrypt.compareSync(password, user.password)
-                //  console.log(validatePassword);
                  if(validatePassword){
                      req.session.userId = user.id
                      req.session.role = user.role
@@ -59,8 +57,8 @@ class LoginController{
                                 service: 'gmail',
                                 // sendMail: true,
                                 auth: {
-                                  user: 'akuninibuatnyobanode@gmail.com',
-                                  pass: 'ofev ogoo cojz qmde'
+                                  user: 'ramadianrp@gmail.com',
+                                  pass: 'wypr cdyz wbhm wffz'
                                 },
                                 // port: 465,
                                 host: "smtp.gmail.com",
@@ -68,7 +66,7 @@ class LoginController{
                               });
                             async function main() {
                             const info = await transporter.sendMail({
-                                from: 'akuninibuatnyobanode@gmail.com',
+                                from: 'ramadianrp@gmail.com',
                                 to: `${user.Profile.email}`,
                                 subject: "Login Success",
                                 text: "Your Login was successful",
@@ -86,13 +84,13 @@ class LoginController{
                                 host: "smtp.gmail.com",
                                 // secure: false,
                                 auth: {
-                                  user: 'akuninibuatnyobanode@gmail.com',
-                                  pass: 'ofev ogoo cojz qmde'
+                                  user: 'ramadianrp@gmail.com',
+                                  pass: 'wypr cdyz wbhm wffz'
                                 },
                               });
                             async function mail() {
                             const info = await usertransporter.sendMail({
-                                from: 'akuninibuatnyobanode@gmail.com',
+                                from: 'ramadianrp@gmail.com',
                                 to: `${user.Profile.email}`,
                                 subject: "Login Success",
                                 text: "Your Login was successful",
